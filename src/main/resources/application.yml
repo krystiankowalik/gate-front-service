@@ -1,0 +1,38 @@
+server:
+    port: 10001
+spring:
+    application:
+        name: gate-front-service
+    security:
+        user:
+            name: someuser
+            password: ${com.gitlab.krystiankowalik.gatefrontservice.spring.security.password}
+    boot:
+        admin:
+            client:
+                url: http://localhost:9000
+                username: admin
+                password: ${com.gitlab.krystiankowalik.gatefrontservice.spring.boot.admin.client.password}
+                instance:
+                    metadata:
+                        user:
+                            name: ${spring.security.user.name}
+                            password: ${spring.security.user.password}
+management:
+    endpoints:
+        web:
+            exposure:
+                include: "*"
+    endpoint:
+        health:
+            show-details: when_authorized
+        logfile:
+            enabled: true
+
+api:
+    base-url: https://somehost:8080
+    endpoint:
+        double-door:
+            toggle: /v1/some-path-to-double-door/
+        single-door:
+            toggle: /v1/some-path-to-single-door/
